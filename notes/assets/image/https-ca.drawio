@@ -1,0 +1,119 @@
+<mxfile host="65bd71144e">
+    <diagram id="6Vc1adGpLqn1qRcgp373" name="第 1 页">
+        <mxGraphModel dx="1150" dy="1610" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;font style=&quot;font-size: 39px&quot;&gt;客户端&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="102" y="249" width="190" height="540" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;font style=&quot;font-size: 39px&quot;&gt;服务器&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="842" y="249" width="190" height="540" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="1. 服务端先创建一堆公钥/私钥" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="802" y="190" width="260" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="endArrow=classic;html=1;fontSize=18;entryX=-0.009;entryY=0.144;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="292" y="302" as="sourcePoint"/>
+                        <mxPoint x="840.2900000000002" y="301.75999999999976" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="2. 客户端向服务器发送请求，获取证书（证书可靠性可靠本地&lt;br&gt;缓存验证，或向证书服务机构发起请求验证）" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="5">
+                    <mxGeometry x="-0.0028" y="-4" relative="1" as="geometry">
+                        <mxPoint y="-3" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="" style="endArrow=classic;html=1;fontSize=18;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="842" y="355" as="sourcePoint"/>
+                        <mxPoint x="292" y="355" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="3. 服务器把公钥返回给客户端" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="7">
+                    <mxGeometry x="0.1879" relative="1" as="geometry">
+                        <mxPoint x="38" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="4. 客户端获取公钥&lt;br&gt;5. 内部创建一个随机字符串作为对称密钥" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="27" y="355" width="340" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="endArrow=classic;html=1;fontSize=18;exitX=1.009;exitY=0.336;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.009;entryY=0.33;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="2" target="3">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="292" y="444.9999999999999" as="sourcePoint"/>
+                        <mxPoint x="840" y="430" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="6. 使用公钥对刚刚5生成的对称密钥进行加密并发送给服务器" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="10">
+                    <mxGeometry x="-0.0028" y="-4" relative="1" as="geometry">
+                        <mxPoint y="-3" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="7. 使用自己的公钥对刚刚6发来的对称密钥进行解密" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="722" y="465" width="420" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="endArrow=classic;html=1;fontSize=18;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="842" y="548" as="sourcePoint"/>
+                        <mxPoint x="292" y="548" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="8. 服务器端结束报文（双方都已经有了对称密钥）" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="13">
+                    <mxGeometry x="0.1879" relative="1" as="geometry">
+                        <mxPoint x="38" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="" style="endArrow=classic;html=1;fontSize=18;entryX=-0.018;entryY=0.79;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="294" y="607" as="sourcePoint"/>
+                        <mxPoint x="838.5799999999999" y="606.5999999999999" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="9. 使用对称密钥对要发送的数据进行加密" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="15">
+                    <mxGeometry x="0.1879" relative="1" as="geometry">
+                        <mxPoint x="-73" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="" style="endArrow=classic;html=1;fontSize=18;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="842" y="695" as="sourcePoint"/>
+                        <mxPoint x="292" y="695" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" value="11. 使用对称密钥进行加密返回响应数据" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;" vertex="1" connectable="0" parent="17">
+                    <mxGeometry x="0.1879" relative="1" as="geometry">
+                        <mxPoint x="38" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="10. 接受数据并对非对称加密密钥进行解密" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="757" y="635" width="350" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="证书申请机构" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="477" y="70" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.005;entryY=0.068;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="20" target="3">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="637" y="310" as="sourcePoint"/>
+                        <mxPoint x="837" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="2. 证书申请机构会对企业的网站资质审核&lt;br style=&quot;font-size: 15px;&quot;&gt;，通过后颁发公钥证书，通常证书中包含&lt;br style=&quot;font-size: 15px;&quot;&gt;企业相关的信息" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=15;" vertex="1" connectable="0" parent="22">
+                    <mxGeometry x="0.1272" y="-1" relative="1" as="geometry">
+                        <mxPoint x="-84" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="" style="endArrow=classic;html=1;exitX=0.177;exitY=-0.003;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="1" source="3" target="20">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="607" y="110.00000000000011" as="sourcePoint"/>
+                        <mxPoint x="864.3499999999999" y="262.78" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="1. 网站开发完成后，&lt;br&gt;企业向第三方可信任的机构申请证书" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=15;" vertex="1" connectable="0" parent="24">
+                    <mxGeometry x="0.1272" y="-1" relative="1" as="geometry">
+                        <mxPoint x="98" y="-35" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
