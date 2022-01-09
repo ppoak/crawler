@@ -1,3 +1,5 @@
+#!python -m weibo.search
+
 import os
 import re
 import time
@@ -79,6 +81,7 @@ class Search():
     def _get_full(self):
         page = 1
         result = []
+        console.log(f"[red]Start in keyword: {self.keyword}")
         while True:
             console.print(f"Getting [blue]{self.keyword}[/blue], currently at page: [blue]{page}[/blue] ... ")
             url = self.base_url.format(self.keyword, page)
@@ -93,6 +96,7 @@ class Search():
     
     def _get_assigned(self, pages):
         result = []
+        console.log(f"[red]Start in keyword: {self.keyword}")
         for page in track(range(1, pages+1)):
             console.print(f"Getting [blue]{self.keyword}[/blue], currently at page: [blue]{page}[/blue] ... ")
             url = self.base_url.format(self.keyword, page)
@@ -337,14 +341,14 @@ class User():
 
 
 if __name__ == "__main__":
-    search = Search("#产后脱发妈妈为癌症患者做10年假发#")
+    search = Search("植发")
     result = search.run()
-    result.to_excel("topic.xlsx", index=False)
-    hot = HotTopic("周深")
-    result = hot.search()
-    print(result)
-    trend = Trend('脱发')
-    result = trend.get_data()
-    trend.plot()
-    user = User("央视新闻")
-    user.search(["头发"], "weibo/data")
+    result.to_excel("植发-热搜.xlsx", index=False)
+    # hot = HotTopic("周深")
+    # result = hot.search()
+    # print(result)
+    # trend = Trend('脱发')
+    # result = trend.get_data()
+    # trend.plot()
+    # user = User("央视新闻")
+    # user.search(["头发"], "weibo/data")
