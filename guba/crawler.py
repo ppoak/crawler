@@ -1,43 +1,12 @@
-from multiprocessing import Pool, Manager
-from lxml import etree
 import pandas as pd
 import time
 import requests
 import random
-import base64
 
+from lxml import etree
+from multiprocessing import Pool, Manager
+from utils.proxy import get_ip_pool_and_filter
 
-def get_ip_pool(pages: int) -> list:
-    proxy_base_url = "http://ip.yqie.com/proxygaoni/index"
-    proxy_url = [proxy_base_url + ".htm"] + [proxy_base_url + f"_{p}" + ".htm" for p in range(2, pages)]
-    ip_pool = pd.DataFrame()
-    for i, pu in enumerate(proxy_url):
-        print(f"acquiring page {i+1}...")
-        data = pd.read_html(pu)[0]
-        data[str(base64.b64decode("5YWN6LS55Luj55CGIGlw"), "utf-8")] = data[str(base64.b64decode("5YWN6LS55Luj55CGIGlw"), "utf-8")].apply(lambda x: str(base64.b64decode(x.split('"')[1]), "utf-8"))
-        ip_pool = ip_pool.append(data, ignore_index=True)
-
-    return ip_pool
-
-def filter_available(ip_pool: pd.DataFrame) -> list:
-    ip_pool_list = []
-    headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
-    }
-    available_ip = []
-    for i in ip_pool.index:
-        ip = {
-            ip_pool.loc[i, str(base64.b64decode("5YWN6LS55Luj55CG57G75Z6L"), "utf-8")].lower(): ip_pool.loc[i, str(base64.b64decode("5YWN6LS55Luj55CG57G75Z6L"), "utf-8")].lower() + "://" + ip_pool.loc[i, str(base64.b64decode("5YWN6LS55Luj55CGIGlw"), "utf-8")] + ":" + str(ip_pool.loc[i, str(base64.b64decode("5Luj55CG56uv5Y+j"), "utf-8")])
-        }
-        ip_pool_list.append(ip)
-        try:
-            res = requests.get("http://baidu.com", headers=headers, timeout=2)
-            res.raise_for_status()
-            available_ip.append(ip)
-            print(f"{ip_pool.loc[i, '免费代理 ip']}:{ip_pool.loc[i, '代理端口']}\tavailable")
-        except:
-            print(f"{ip_pool.loc[i, '免费代理 ip']}:{ip_pool.loc[i, '代理端口']}\tunavailable")
-    return available_ip
 
 def get_comment(process: int, stockid: str, startpage: int, endpage: int, proxies: list, data: dict) -> None:
     print(f"process no. {process + 1} process started...")
@@ -104,8 +73,7 @@ if __name__=='__main__':
     
     # get proxies
     get_proxy_time_start = time.time()
-    ip_pool = get_ip_pool(10)
-    proxies = filter_available(ip_pool)
+    proxies = get_ip_pool_and_filter()
     print(f"find {len(proxies)} available, using {time.time() - get_proxy_time_start:.2f}s, load them for crawling comments...")
 
     # create processing pool and crawl for data
