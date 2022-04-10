@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import base64
 import requests
@@ -30,8 +31,7 @@ def filter_available(ip_pool: list, timeout: float = 1.0) -> list:
         }
         ip_pool_list.append(ip)
         try:
-            res = requests.get("http://baidu.com",
-                               headers=headers, timeout=timeout)
+            res = requests.get("http://baidu.com", headers=headers, timeout=timeout)
             res.raise_for_status()
             available_ip.append(ip)
             print(
@@ -44,13 +44,27 @@ def filter_available(ip_pool: list, timeout: float = 1.0) -> list:
 
 
 def get_ip_pool_and_filter(pages: int = 5, timeout: float = 1.0) -> list:
-    '''获取可用代理ip池，npages越大，可用ip越多，
+    '''获取可用代理ip池, npages越大, 可用ip越多,
     但相应的测试速度也就越慢，
-    最大ip池页面数参考http://ip.yqie.com/proxygaoni/index.htm，
+    最大ip池页面数参考http://ip.yqie.com/proxygaoni/index.htm,
     目前最大可用页面为3423页
     '''
-    return filter_available(get_ip_pool(pages), timeout=timeout)
+    import time
+    start = time.time()
+    ip_list = get_ip_pool(pages)
+    proxy_list = filter_available(ip_list, timeout=timeout)
+    end = time.time()
+    print(f'Spend {end - start:.2f}s on getting available ip')
+    print(f'There are {len(proxy_list)} available proxy, available rate is {(len(proxy_list) / len(ip_list) * 100):.2f}%')
+    return proxy_list
 
+def get_ip_new(apikey: str,num: int):
+    url = f"http://www.padaili.com/proxyapi?api={apikey}&num={num}&type=3&xiangying=1&order=jiance"
+    res = requests.get(url)
+    res.raise_for_status()
+    ip_list = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}', res.text)
+    proxy_list = list(map(lambda x: {'http': 'http://' + x, 'https': 'http://' + x}, ip_list))
+    return proxy_list
 
 if __name__ == '__main__':
     '''下面是一个使用实例，对于多线程任务+ip代理池的处理
